@@ -1,0 +1,365 @@
+100
+# Attempt to deallocate when no Allocs.  Should all fail.
+D 30
+D 40
+D 1
+D 10
+D 2
+# Attempt to allocate spaces too big for max memory size.  Should DF and Fail.
+A 101
+A 200
+A 300
+A 1000
+A 10000
+# Allocate all of the memory with 20 allocs.  Should all pass.
+A 5
+A 3
+A 1
+A 3
+A 4
+A 8
+A 6
+A 2
+A 10
+A 5
+A 7
+A 6
+A 3
+A 4
+A 8
+A 7
+A 1
+A 3
+A 6
+A 8
+# Attempt to allocate when no frees  Should DF and Fail.
+A 10
+A 20
+A 30
+A 40
+A 50
+# Deallocate all of the original SUCCESSFUL allocations.
+# Deallocations D1 through D5 should fail.  D26 should also fail.
+D 1
+D 2
+D 3
+D 4
+D 5
+D 6
+D 7
+D 8
+D 9
+D 10
+D 11
+D 12
+D 13
+D 14
+D 15
+D 16
+D 17
+D 18
+D 19
+D 20
+D 21
+D 22
+D 23
+D 24
+D 25
+D 26
+# Now have everything deallocate, will re-set to a big free block with A 100.
+# Both A 100 and D31 should be successful.
+A 100
+D 31
+# Now have a block of 100 free space.
+# Allocate 99 and 1, Deallocate both.  Should both work.
+A 99
+A 1
+D 32
+D 33
+# Allocate 100 and deallocate to rest back to 100 free in 1 block.
+A 100
+D 34
+# Attempt 101 single-bit inputs.
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+A 1
+# Should be 100 successes and 1 failure.
+# Now Deallocate all of those allocations.  D35 to D135 should succeed.  D136 should fail.
+D 35
+D 36
+D 37
+D 38
+D 39
+D 40
+D 41
+D 42
+D 43
+D 44
+D 45
+D 46
+D 47
+D 48
+D 49
+D 50
+D 51
+D 52
+D 53
+D 54
+D 55
+D 56
+D 57
+D 58
+D 59
+D 60
+D 61
+D 62
+D 63
+D 64
+D 65
+D 66
+D 67
+D 68
+D 69
+D 70
+D 71
+D 72
+D 73
+D 74
+D 75
+D 76
+D 77
+D 78
+D 79
+D 80
+D 81
+D 82
+D 83
+D 84
+D 85
+D 86
+D 87
+D 88
+D 89
+D 90
+D 91
+D 92
+D 93
+D 94
+D 95
+D 96
+D 97
+D 98
+D 99
+D 100
+D 101
+D 102
+D 103
+D 104
+D 105
+D 106
+D 107
+D 108
+D 109
+D 110
+D 111
+D 112
+D 113
+D 114
+D 115
+D 116
+D 117
+D 118
+D 119
+D 120
+D 121
+D 122
+D 123
+D 124
+D 125
+D 126
+D 127
+D 128
+D 129
+D 130
+D 131
+D 132
+D 133
+D 134
+D 135
+D 136
+# Now we have 100 single-bit free spaces.
+# Allocate an 80, defrag and success.
+A 80
+# Allocate a 21, defrage and failure.
+A 21
+# Allocate a 20, will work.
+A 20
+# Allocate a single bit on a fully allocated memory space - should defrag and fail.
+A 1
+# Deallocate the 80 and 20.
+D 136
+D 138
+# Allocate and free the whole space.
+A 100
+D 140
+# Allocate and deallocate a 99 spcae.
+A 99
+D 141
+# Now we have structures with 99 and 1.
+A 2
+A 4
+A 6
+A 6
+A 8
+A 8
+A 16
+A 8
+A 6
+A 10
+A 12
+A 8
+# Allocating the final 6 bits, should work.
+A 6
+# Allocating another 6 bits, should fail.
+A 6
+# Allocate single-bit to check for random free spaces or mishandling of small numbers.
+A 1
+A 1
+# Now we have a fully allocated space.  A few strategic defrags and allocations to test the allocation methods.
+# Because of how we did the allocations/deallocations, all three structures share the same addresses of allocated space.
+D 145
+D 146
+# Now we have 14 free at 12.
+D 149
+D 151
+D 150
+# Now we have 24 free at 50
+D 154
+D 153
+# Now we have 14 free at 86
+#
+# If we allocate 14, it should be at 12 for BBST, 50 for src.Heap, and 86 for Hash.
+#
+A 14
+#
+# For the next, BBST should go to 86, src.Heap to 86, and HASH to 12
+#
+A 14
+#
+# Now BBST and HASH have 24 free at 50, src.Heap has 14 at 12 and 10 at 64
+#
+# A 24 should work for BBST and Hash, but fail for src.Heap.
+A 24
+#
+# BBST and Hash are full, src.Heap has 14 free at 12 and 10 free at 64.
+# A 10 will go to 12 because of worst fit, leaving 4 free at 22.
+# This will fail for BBST and HASH.
+A 10
+# This will go to 64 for HEAP and fail for BBST and HASH.
+A 10
+# This will go to 22 for HEAP and fail for BBST and HASH.
+A 4
+# The next five should fail for all three.
+A 1
+A 1
+A 1
+A 1
+A 1
