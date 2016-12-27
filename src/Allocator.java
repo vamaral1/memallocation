@@ -122,15 +122,6 @@ public class Allocator<T extends MemoryStructure<Block>>
             }
         }
         place = 0;
-        checkstyle(b, place, def);
-        return defrag;
-    }
-    /** cyclomatic complexity.
-     * @param b block
-     * @param place place
-     * @param def block
-     */
-    public void checkstyle(Block[] b, int place, Block[] def) {
         for (int i = 0; i < b.length; i++) {
             if (b[i] != null) {
                 def[place++] = b[i];
@@ -144,8 +135,8 @@ public class Allocator<T extends MemoryStructure<Block>>
                 }
             }
         }
+        return defrag;
     }
-
     /** sorts the array with a bucketsort based on the address.
      * @return block array of the blocks in sorted order
      */
